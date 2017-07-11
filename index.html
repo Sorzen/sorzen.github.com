@@ -259,8 +259,39 @@
 
 <!-- Import Font -->
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.svg#Roboto) format('svg')
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: regular;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.svg#Roboto) format('svg')
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 500;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.svg#Roboto) format('svg')
+        }
+
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://lib.baomitu.com/material-design-icons/3.0.1/iconfont/MaterialIcons-Regular.eot);
+            src: url(https://lib.baomitu.com/material-design-icons/3.0.1/iconfont/MaterialIcons-Regular.woff2) format('woff2'),url(https://lib.baomitu.com/material-design-icons/3.0.1/iconfont/MaterialIcons-Regular.woff) format('woff'),url(https://lib.baomitu.com/material-design-icons/3.0.1/iconfont/MaterialIcons-Regular.ttf) format('truetype')
+        }
+    </style>
 
 
         <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==")</script>
@@ -392,7 +423,7 @@
             
                 <a class="index_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Hexo&url=http://yoursite.com/&pic=&searchPic=false&style=simple" target="_blank">
                     <li class="mdl-menu__item mdl-js-ripple-effect">
-                        شارك على Weibo
+                        Auf Weibo teilen
                     </li>
                 </a>
             
@@ -400,7 +431,7 @@
             
                 <a class="index_share-link" href="https://twitter.com/intent/tweet?text=Hexo&url=http://yoursite.com/&via=Sorzen" target="_blank">
                     <li class="mdl-menu__item mdl-js-ripple-effect">
-                        شارك على Twitter
+                        Auf Twitter teilen
                     </li>
                 </a>
             
@@ -408,7 +439,7 @@
             
                 <a class="index_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/index.html" target="_blank">
                     <li class="mdl-menu__item mdl-js-ripple-effect">
-                        شارك على Facebook
+                        Auf Facebook teilen
                     </li>
                 </a>
             
@@ -416,7 +447,7 @@
             
                 <a class="index_share-link" href="https://plus.google.com/share?url=http://yoursite.com/" target="_blank">
                     <li class="mdl-menu__item mdl-js-ripple-effect">
-                        شارك على Google+
+                        Auf Google+ teilen
                     </li>
                 </a>
             
@@ -424,7 +455,7 @@
             
                 <a class="index_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=http://yoursite.com/&title=Hexo" target="_blank">
                     <li class="mdl-menu__item mdl-js-ripple-effect">
-                        شارك على LinkedIn
+                        Auf LinkedIn teilen
                     </li>
                 </a>
             
@@ -432,7 +463,7 @@
             
                 <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Hexo&title=Hexo&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/" target="_blank">
                     <li class="mdl-menu__item">
-                        شارك على QQ
+                        Auf QQ teilen
                     </li>
                 </a>
             
@@ -473,7 +504,7 @@
         
         &nbsp;&nbsp;&nbsp;
         <span>
-            <a href="/2017/07/11/编程书单/" target="_self">واصل القراءة</a>
+            <a href="/2017/07/11/编程书单/" target="_self">Weiterlesen</a>
         </span>
     </div>
     <!-- Post_entry Info-->
@@ -591,7 +622,7 @@
                 
                     <i class="material-icons sidebar-material-icons">home</i>
                 
-                الرئيسية
+                Home
             </a>
         </li>
         
@@ -604,7 +635,7 @@
                 
                     <i class="material-icons sidebar-material-icons">inbox</i>
                 
-                    أرشيف
+                    Archive
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -656,7 +687,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
     <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
         <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-            سمة - Material
+            Theme - Material
             <span class="sidebar-badge badge-circle">i</span>
         </div>
     </a>
