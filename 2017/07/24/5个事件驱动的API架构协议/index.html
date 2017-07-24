@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Sorzen,owengengshaozhen@live.com"><title>5个事件驱动的API架构协议 · Hexo</title><meta name="description" content="原文：5 Protocols For Event-Driven API Architectures
+  互联网是一种通信系统，因此，客户端与服务器之间的关系以及服务器与服务器之间的关系是最讨论和热烈争议的概念之一。事件驱动架构是一种定义这些关系的方法，并且在特定的一组关系中创建允许广泛功能的系统。
+"><meta name="keywords" content="HTML,CSS,JavaScript,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Hexo</a></h3><div class="description"><p>Record of personal experience blog</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>5个事件驱动的API架构协议</a></h3></div><div class="post-content"><p>原文：<a href="http://nordicapis.com/5-protocols-for-event-driven-api-architectures/" target="_blank" rel="external">5 Protocols For Event-Driven API Architectures</a></p>
+<p>  互联网是一种通信系统，因此，客户端与服务器之间的关系以及服务器与服务器之间的关系是最讨论和热烈争议的概念之一。事件驱动架构是一种定义这些关系的方法，并且在特定的一组关系中创建允许广泛功能的系统。</p>
+<p>在这篇文章中，我们将讨论5种常见的事件驱动方法 - WebSockets，WebHooks，REST Hooks，Pub-Sub和Server Sent事件。我们将定义他们的根本原因和做法，以及API提供商如何使用它们。此外，我们将提供各种优缺点，为您的平台选择解决方案简单直观。</p>
+<h1 id="什么是事件驱动的架构？"><a href="#什么是事件驱动的架构？" class="headerlink" title="什么是事件驱动的架构？"></a>什么是事件驱动的架构？</h1><p>事件驱动的架构建立一个可以消耗和反应的事件。但是什么是事件？</p>
+<p>事件本质上是从一个州到另一个州的任何重大变化，例如从您的收件箱中没有邮件到您的收件箱中有新邮件的更改。这种状态可以在内部进行反应（例如当有问题的电子邮件程序实现了新消息已被接收时），外部（当用户看到新消息的通知时），或用于生成另一事件（例如，消息递增1）。</p>
+<p>事件驱动架构吸引API开发人员，因为它们在异步环境中运行良好。通过制定触发新事件传递的某些功能的API，API系统不必固有地等待同步传送或实时通信。这是非常有益的，因为不需要不断地轮询端点，从而避免资源浪费，从而减少通用硬件需求和呼叫特定开销。</p>
+<p>由于这个原因，事件驱动的架构非常受欢迎，并且与其他解决方案和体系结构（如轮询和其他以投票为中心的衍生产品）相比，可以提高功耗，带宽和协同处理能力。</p>
+<h1 id="API的事件驱动协议类型5"><a href="#API的事件驱动协议类型5" class="headerlink" title="API的事件驱动协议类型5"></a>API的事件驱动协议类型5</h1><h2 id="1：WebSockets"><a href="#1：WebSockets" class="headerlink" title="1：WebSockets"></a>1：WebSockets</h2><p>WebSockets是一个有趣的事件驱动解决方案，因为对大多数浏览器而言，它们实际上已被应用于应用程序本身。本质上，WebSocket是一种在单个TCP连接上提供全双工通信的协议。由Internet工程任务组作为RFC 6455标准化，Web IDL中的WebSocket API随后在W3C横幅下标准化。</p>
+<p>虽然协议本身意在在Web浏览器和服务器之间使用，但是在存在客户端 - 服务器关系的任何情况下都可以使用该协议。协议本身是基于TCP，附加的HTTP解释语句被认为是允许互操作性的“升级请求”。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>因为WebSocket是专为浏览器操作而设计的，因此它实际上具有极低的开销。通过使用标准化方法建立全双工会话，可以同时进行两个实体的连接，从而降低开销并提高吞吐量。</p>
+<p>另外，这些通信通过TCP 80/443进行的事实意味着，出于安全原因，传统上阻止非基于Web的应用程序的环境仍然可以处理此协议，因为防火墙允许与该端口进行通信。</p>
+<p>也许对使用WebSockets的最强烈的争论是，它们是所有主流浏览器的标准化和本机支持，从Microsft Edge到Opera，从Firefox到Chrome。这意味着任何与之相关的Web应用程序都可以在绝大多数基于浏览器和浏览器的网关和应用程序中进行交互。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>WebSockets有一个不同的主要失败 - 虽然它可能支持类似HTTP的功能，但它不是HTTP。这有其含义，特别是在考虑优化HTTP（例如缓存，代理等）时，这些并不显而易见。</p>
+<p>因为WebSockets是比较新的，所以在2011年才被正式标准化，业界还在理解副作用的含义。使用WebSockets的大多数应用程序都是针对WebSocket的所有内容而设计的 - 但尚无法看到的是，该解决方案是否长期比当前可用的无状态解决方案更好。</p>
+<p>当然，与此列表中的其他架构一样，WebSockets会在数据传输期间创建一个“始终开启”连接。虽然这对于诸如媒体流和实况流计算的许多用途来说是很好的，但它也基本上意味着对于WebSockets来说，没有可扩展性。端口具有硬编码的限制和带宽，因此为了“扩展”，您必须添加额外的端口以匹配最大负载。在无状态系统中，这不是一个问题，因为请求可以等待并以使其独立于服务器本身的状态。</p>
+<h2 id="2：WebHooks"><a href="#2：WebHooks" class="headerlink" title="2：WebHooks"></a>2：WebHooks</h2><p>WebHooks是与WebSocket类似的概念。它们主要使用自定义回调函数，或作为参数传递给另一块代码并在指定时间点执行的代码。基本上，WebHook是一个荣耀的系统，“如果这样做，然后做”，允许独立于事件触发的用户在自己的系统中制定对该事件的自定义响应。</p>
+<p>该术语由Jeff Lindsay于2007 年创立，并迅速成为希望为外部行为创建自动化响应的用户之间流行的。一个很好的例子是开发人员将一个新项目推送到GitHub，这会导致一个事件。用户将系统绑定到WebHook的URI中。当推送被发布时，用户的系统利用WebHook的URI将推送到更大的构建中，从而创建一个编译的组件。</p>
+<h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><p>WebHooks的功能很像WebSockets，但在一些关键领域却是不同的。首先，WebSockets主要设计用于基于浏览器的通信，并且无论在任何客户端 - 服务器通信中都可以使用它们，它们在服务器到服务器设置中表现不佳。</p>
+<p>另一方面，WebHooks由于操作方式在服务器到服务器系统中运行良好。因为系统基本上起着前面提到的“如果这样做”的作用，服务器可以被配置成随时绑定到预先形成的URI中，并且每当该事件被触发时执行给定的功能。</p>
+<p>此外，与WebSockets不同，WebHooks具有基于HTTP的独特优势。这意味着系统可以集成而不用任何新的基础设施，允许快速采用和相对简单的设置。</p>
+<h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><p>WebHooks的问题是，它们的许多功能已经可以被放置在可以说是更强大的REST架构方法上。虽然采用事件驱动架构通常是正在构建服务的一个要求，但是当它可以在REST中镜像时，这是一个很难卖的，同时还能给予用户REST丰富的选项。</p>
+<p>这些RESTful解决方案（例如RestMS）本质上仅仅是消息查询服务，并且需要额外的基础设施，考虑到应用程序的目的可能或可能不可行。</p>
+<p>此外，WebHooks可以是客户端和服务器的资源密集型。如果客户端需要通知许多服务器发生事件，并且服务器需要收听大量客户端通知此更改，则可以很快地遇到网络不可控制的情况。虽然HTTP确实很好，但这是一个明确的负面考虑。</p>
+<p>但是，还有一些方法可以在HTTP之上构建消息排队服务 - 一些RESTful示例包括IronMQ和RestMS。</p>
+<h2 id="3：REST-Hooks"><a href="#3：REST-Hooks" class="headerlink" title="3：REST Hooks"></a>3：REST Hooks</h2><p>说到RESTful的例子，REST Hooks本质上是“挂钩”的。定义为Zapier的一项举措，这是我们之前讨论过的一个主题- 钩子将整合到单个目标网址作为订阅，当注意到更改时，将对资源请求者进行排序。</p>
+<p>这种方法是对轮询的做法的响应，其中客户端不断检查资源的更改。在REST Hooks范例下，客户端等待更改，并对其进行响应。简而言之，这是REST中的WebHook。</p>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><p>REST Hooks在正确的上下文中显然是超级强大的 - 能够被动地接收资源，而不是专用于持续轮询的处理能力，从而释放了很多客户端的成本。</p>
+<p>也许对于REST钩最强的说法虽然是事实，这是很容易和直观的使用。虽然WebHooks利用HTTP，因此不需要新的架构进行设置，但是它们也受到其基于HTTP构建的限制，因此可以有效地进行设置并有效地进行设置。</p>
+<p>但是，REST Hooks是基于订阅的，因此可以通过订阅简单地使用。这使得它成为一种非常易于使用的解决方案，同时提供了更复杂系统的大量可用性和有效性。</p>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><p>当然，每个解决方案都有其负面影响，而REST Hooks并没有什么不同。可以看出，REST Hooks实际上面临着REST是什么 - 会话自由和无状态。REST Hooks本质上创建一致的轮询，它只是将轮询从一侧移动到另一侧。</p>
+<p>那么REST Hooks可能正在做一些已经解决的问题，这是有争议的问题。有些人会认为，TCP已经做了REST Hook的大部分尝试，只需在HTTP之上分层更多的解决方案来获得TCP已经做的是一个糟糕的方法。</p>
+<h2 id="4：Pub-Sub"><a href="#4：Pub-Sub" class="headerlink" title="4：Pub-Sub"></a>4：Pub-Sub</h2><p>Pub-Sub是一种略有不同的方法。以其全称为发布 - 订阅，概念是将事件发布到类，而不知道客户端订阅类。基本上，用户将加入一个或多个类，然后将会收到事件更新，而不考虑事件发布者的知识。</p>
+<p>这里的主要区别是供应商的有意识的选择 - 在本文所述的其他解决方案中，用户有意识地与给定的服务器或提供商进行通信，并以预定的方式接收事件。在Pub-Sub方案下，用户只会指定他们希望成为其中的哪个类，以及他们感兴趣的事件。从那里，当被推出时，他们会收到这些事件。</p>
+<p>在互联网讨论中常常构成的一种方式是在无线电频道的框架中。唱片公司或出版商向电台发出音频，然后将该音频广播到听众或订阅者。这个公共广播电台是这个中间广播电台 - 听众不知道谁给了车站音乐，公司也不知道听众是谁。正是这种分割被烘烤成模式。</p>
+<p>当我们谈论Pub-Sub时，我们需要记住，我们其实正在谈论两件事情。Pub-Sub可以表示编程术语中的方法和一般概念，但也可以基于该方法来表示具体的提供者解决方案。例如，Google的Cloud Pub / Sub是云服务中的一般方法的实现，并允许如上所述的异步多对多的pub-sub关系。</p>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><p>Pub-Sub的一大优势是松散耦合，因此具有极大的可扩展性和灵活性。事件提供者正在做的唯一的事情是生成内容 - 通过分离的中间人完成彼此的步骤，因此内容可以轻松地扩展和调整到解决方案的体系结构和设计。</p>
+<p>此外，Pub-Sub本身也非常适合测试。订户狭义地限于他们在类下请求的一组事件，因此如果发生故障，这种自然分段通知供应商故障位置以及哪个用户正在经历故障。</p>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><p>不幸的是，去耦对于这种模式也是一个很大的缺点。作为中间人，Pub-Sub无法有效地通知提供者已经发送了一条消息，并且侦听器与事件分离，因此可能不知道是否未发送已经发送的消息。回到收音机解说，听众永远不会知道一首歌曲是想在频道上播放还是频道超出范围，一旦录音高管切断音乐，他们就不知道用户是否收到他们没有直接反馈的歌曲。</p>
+<p>此外，虽然系统是可扩展和灵活的，但是在高流量负载下确实发生不稳定性，因为可能构造子类之后的子类来处理进一步的分段。这当然也会导致上述的不稳定性，而且增加了复杂性。</p>
+<p>你必须记住，虽然这种模式的发布者和订阅者之间的关系可能是有益的，但是当需要调整这些关系时，它也有自身的困难。虽然你可以解决这个问题，但是在这一点上，你正在打破这种模式的基础，而不是任何次要的性质 - 你试图脱水，并且与模式的性质相抗衡，天生贫穷</p>
+<p>另请参阅：为您的微服务构建前端后台（BFF）</p>
+<h2 id="5：服务器发送事件"><a href="#5：服务器发送事件" class="headerlink" title="5：服务器发送事件"></a>5：服务器发送事件</h2><p>服务器发送事件或SSE是一种非常像WebSockets的通信协议，但是具有单向数据的含义。在这种架构中，服务器一直以自动过程向客户端发送更新。这是由W3C在HTML5标准化的，因此与任何兼容HTML5兼容的解决方案兼容。</p>
+<p>值得注意的是，来自Web超文本应用技术工作组的竞争性标准化- 这是从“HTML5”移动到WHATWG称为“HTML生活标准”的遗物。总体工作上的共识是，WHATWG的标准化在罕见的不同标准的情况下是优先的。考虑到WHATWG是由于W3C对于演进HTML的缺乏感兴趣而创建的，因此随着时间的推移，这可能会成为更多的问题，但目前的标准通常是可以接受的。<br>尽管理论上的简单，服务器发送事件在考虑利益和弊端方面是简单的。</p>
+<h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><p>SSE 在其通信中不是双向的 - 服务器以稳定，可预测的方式发布事件。这对于不需要将WebSockets或其他此类解决方案进行双向通信的应用程序非常有益，因为这意味着更低的带宽，以及在数据传输期间连接是暂时的，而不是始终保持连接。由于其性质，数据正在以一种方式传输，因此无需等待数据的返回。</p>
+<p>此外，至少在理论上，上交所在复杂的情况下更容易建立。您只需要担心数据通过一个系统传播到一个方向，从而大大降低了复杂性。没有必要定义消息交换协议，不需要指定数据持续时间或等待时间，无需支持双向消息传递 - 单向节省了很多复杂性。</p>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><p>这种简单性可能是SSE针对特定用例而失败的原因。SSE对于需要双向通信的情况来说是一个非常糟糕的解决方案，而这似乎是显而易见的，许多开发人员会惊讶地看到有多少系统实际上依赖双向通信来实现简单的功能。</p>
+<p>虽然大部分可以通过解决方法进行修复，但开发人员在选择事件驱动协议时的目标应该是找到一种可以开箱即用的方法，而不是找到可以正常配置的可能工作的解决方案，并给予辅助系统依靠。</p>
+<p>还有安全和身份验证的问题。虽然双向系统可以轻松使用身份验证方法，但SSE使用头文件转发来处理此问题。虽然在许多语言和应用程序中可以操纵和覆盖标题，但JavaScript中的EventSource对象本身不支持此操作，这将导致许多收件人成为一些主要的头痛。</p>
+<p>最后，对传输数据的效率损失存在疑虑。双向系统可以确定客户端或服务器何时断开连接，但SSE只能在尝试完全数据传输并接收到注意到的故障后才能确定客户端已断开连接。正因为如此，数据可能会丢失得很快，并且连接失败，这种损失可能会随着时间的推移而急剧增加。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>没有一个事件驱动的解决方案适用于每个用例。虽然许多人会认为事件驱动的解决方案应该是基于REST的，这表明REST Hooks作为答案，但许多其他人认为它完全是情境性的，REST并不总是被吹捧的银弹。</p>
+<p>如果您在浏览器环境中构建可扩展性低的开销，WebSockets是一个很好的解决方案。相反，如果您想要同样的好处，但是在非浏览器系统中工作，那么WebHooks应该是您的方法。REST Hooks不仅对RESTful服务非常有用，而且还可以比任何一种更易于设置，因此在低潮高潮的情况下是非常好的。如果您需要在客户端和服务器之间执行划分，那么这个Pub-Sub就可以很好了，这可以通过Server Sent进一步建立和控制。</p>
+<p>简单地说，最好的解决方案将是适合您具体情况并构建的解决方案 - 任何这些解决方案，鉴于正确的系统，是一个很好的解决方案。为此，每个解决方案都有非常具体的用例。</p>
+<h3 id="TLDR比较表"><a href="#TLDR比较表" class="headerlink" title="TLDR比较表"></a>TLDR比较表</h3><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>相关</th>
+<th>标准</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WebSockets</td>
+<td>TCP, HTTP-like</td>
+<td>IETF, W3C</td>
+<td>通过TCP双向通信;为Web浏览器和Web服务器设计适用;于较低开销方案所有主流浏览器都支持</td>
+</tr>
+<tr>
+<td>Webhooks</td>
+<td>URI, HTTP</td>
+<td>-</td>
+<td>用户定义的“HTTP回调” ;事件触发HTTP ;请求到Webhook URI ;启用实时事件触发</td>
+</tr>
+<tr>
+<td>REST Hooks</td>
+<td>HTTP</td>
+<td>Zapier</td>
+<td>轻量级订阅层;由REST API操作;基本上是REST中的WebHook</td>
+</tr>
+<tr>
+<td>Pub-Sub</td>
+<td>-</td>
+<td>-</td>
+<td>客户端订阅客户端和服务器之间的;双向;中间层;耦合层</td>
+</tr>
+<tr>
+<td>Server Sent</td>
+<td>HTTP, HTML5 , DOM</td>
+<td>WHATWG, W3C</td>
+<td>服务器不断向客户端发送更新;单向推送通知作为DOM事件</td>
+</tr>
+</tbody>
+</table>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-07-24</span><i class="fa fa-tag"></i><a href="/tags/事件驱动-通信协议/" title="事件驱动,通信协议" class="tag">事件驱动,通信协议 </a></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,http://yoursite.com/2017/07/24/5个事件驱动的API架构协议/,Hexo,5个事件驱动的API架构协议,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2017/07/11/编程书单/" title="编程书单" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
