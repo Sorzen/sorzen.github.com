@@ -13,7 +13,7 @@
 <p>v-if 也是惰性的,如果在初始渲染时条件为假,那么什么都不做，直到条件第一次为真的时候才会开始渲染条件块,<br>相比之下,v-show就简单得多，不管初始条件是什么,元素总会被渲染,并且只是简单的基于css进行切换.</p>
 <p>一般来说,v-if 有更高的切换开销,而 v-show 有更高的初始渲染开销.因此,如果需要非常频繁的切换,那么使用v-show好一点;如果在<br>运行时条件不太可能改变,则使用v-if 好点.</p>
 <p>因此当v-if=”false”时，页面并没有渲染此DOM元素，当设置为true时才开始渲染，因此当v-if=’true’时父组件开始渲染子组件，因此子组件不能及时watch父组件传来的值的变化。<br>当使用v-show时只是在css样式上的显示和隐藏，而DOM元素一直存在于页面中，子组件可以一直监测父组件传递来的值的变化。</p>
-</div><div class="article-meta" style="max-width:800px"><div class="tags"><i class="icon icon-tag"></i><ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑-开发中遇到的bug/">踩坑,开发中遇到的bug</a><span class="tag-list-count">1</span></li></ul></div></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cjucwf8nm000d6uzvvhowoo9q" data-title="开发过程采坑记录" data-url="http://yoursite.com/2018/05/03/开发过程采坑/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+</div><div class="article-meta" style="max-width:800px"><div class="tags"><i class="icon icon-tag"></i><ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑-开发中遇到的bug/">踩坑,开发中遇到的bug</a><span class="tag-list-count">1</span></li></ul></div></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cjucwgsgx000haszvjd9nty1x" data-title="开发过程采坑记录" data-url="http://yoursite.com/2018/05/03/开发过程采坑/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
 var duoshuoQuery = {short_name: siteName};
 (function() {
   var ds = document.createElement('script');
